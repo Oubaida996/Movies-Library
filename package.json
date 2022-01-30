@@ -1,0 +1,25 @@
+{
+  "name": "movies-library",
+  "version": "1.0.0",
+  "description": "A movie app that can check the latest movies based on categories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oubaida996/Movies-Library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oubaida996/Movies-Library/issues"
+  },
+  "homepage": "https://github.com/Oubaida996/Movies-Library#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2"
+  }
+}
