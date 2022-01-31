@@ -1,25 +1,118 @@
 "use strict";
 
+//======Start declear Variable
+
 const exprees = require("express");
+const axios = require("axios");
 const jsonData = require("./movie_data/data.json");
 const port = 3000;
 const app = exprees();
 
+const dotenv = require("dotenv");
 
-// console.log(jsonData);
+dotenv.config();
+
+const APIKEY = process.env.APIKEY;
 
 
 
-function MovieInfo(title, poster_path, overview) {
+
+
+//======End declear Variable
+
+//======Start MovieInfo Constructor Function
+
+function MovieInfo(id, title, release_date, poster_path, overview) {
+    this.id = id;
     this.title = title;
+    this.release_date = release_date;
     this.poster_path = poster_path;
     this.overview = overview;
 }
 
+//======End MovieInfo Constructor Function
+
+//=======Start Task12
+
+//======Start Get the trending movies data from the Movie DB API
+
+app.get("/trending", (req, res) => {
+    let movies = [];
+    axios
+        .get(`https://api.themoviedb.org/3/trending/all/week?api_key=${APIKEY}&language=en-US`)
+        .then((value) => {
+            value.data.results.forEach((element) => {
+                let newMovie = new MovieInfo(
+                    element.id,
+                    element.title,
+                    element.release_date,
+                    element.poster_path,
+                    element.overview
+                );
+                movies.push(newMovie);
+            });
+            // console.log(movies);
+            res.status(200).json(movies);
+        })
+        .catch((error) => {
+            console.log(error.data);
+        });
+});
+
+//======End Get the trending movies data from the Movie DB API
+
+//========Start Search for a movie name to get its information
+
+app.get("/search", (req, res) => {
+
+    let serachQuery = req.query.query;
+    //console.log(serachQuery);
+
+    axios
+        .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${serachQuery}`
+        )
+        .then((value) => {
+            res.status(200).json(movies);
+        });
+});
+
+//========End Search for a movie name to get its information
+
+
+//=======Start Get the primary TV show details by id.
+
+
+app.get("/tv", (req, res) => {
+
+    let numberOfTV = req.query.query;
+    //console.log(req);
+
+    axios
+        .get(
+            `https://api.themoviedb.org/3/tv/${numberOfTV}?api_key=${APIKEY}&language=en-US`
+        )
+        .then((value) => {
+            res.status(200).json(value.data);
+        });
+});
+
+
+//=======End Get the primary TV show details by id.
+
+
+
+
+//=======End Task12
+
 app.get("/", (req, res) => {
     let movies = [];
 
-    let newMovie = new MovieInfo(jsonData.title, jsonData.poster_path, jsonData.overview);
+    let newMovie = new MovieInfo(
+        jsonData.title,
+        jsonData.poster_path,
+        jsonData.overview
+    );
     movies.push(newMovie);
     res.status(200).json(movies);
     //  res.send(movies);
@@ -36,9 +129,7 @@ app.get("/favorite", (req, res) => {
     }
 
     res.send(result);
-
 });
-
 
 function handleError500() {
     return {
@@ -48,44 +139,15 @@ function handleError500() {
 }
 
 function handleError404() {
-
     return {
         status: 404,
         responseText: "page not found error",
     };
-
 }
-
-
 
 app.listen(port, () => {
     console.log(`server has started on port ${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ======Start This is section for me
 
