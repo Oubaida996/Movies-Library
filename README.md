@@ -44,3 +44,17 @@ I used exprees module to make APIs
 
 Q1 :Everything is good today :)  \
 Q2: I took 2 hours to do it because I read a lot about this topic, but i thought that i will take less time like 1 hours.  
+
+
+
+# Task 12
+
+# Movies-Library - v:0.0.3
+
+
+
+## WRRC
+[image](./assets/lifeCycle2.jpg)
+
+Q1 :Everything is good today :)  \
+Q2: I took 3 hours to do it because I read a lot about this topic, but i thought that i will take less time like 2 hours.  
