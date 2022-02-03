@@ -9,7 +9,12 @@ const app = exprees();
 //task 13
 const pg = require("pg");
 
-const client = new pg.Client("postgres://obieda:0000@localhost:5432/movie");
+// const client = new pg.Client();
+
+const client = new pg.Client({
+    connectionString: "postgres://obieda:0000@localhost:5432/movie",
+    ssl: { rejectUnauthorized: false }
+});
 
 app.use(exprees.json());
 
