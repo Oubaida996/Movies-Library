@@ -236,7 +236,8 @@ app.get("/", (req, res) => {
         jsonData.overview
     );
     movies.push(newMovie);
-    res.status(200).json(movies);
+    res.status(200).send("movies");
+    // res.status(200).json(movies);
     //  res.send(movies);
 });
 
