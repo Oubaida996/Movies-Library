@@ -5,6 +5,7 @@
 const exprees = require("express");
 const axios = require("axios");
 const jsonData = require("./movie_data/data.json");
+
 const app = exprees();
 //task 13
 const pg = require("pg");
@@ -27,6 +28,7 @@ const res = require("express/lib/response");
 dotenv.config();
 
 const APIKEY = process.env.APIKEY;
+const port = process.env.PORT;
 
 
 const port = process.env.PORT;
@@ -89,8 +91,14 @@ app.get("/search", (req, res) => {
             `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${serachQuery}&page=${pageQuery}`
         )
         .then((value) => {
+
+            res.status(200).json(value.data);
+            console.log(value);
+
+
             // console.log(value.data);
             res.status(200).json(value.data);
+
         });
 });
 
