@@ -8,9 +8,20 @@ const jsonData = require("./movie_data/data.json");
 
 const app = exprees();
 //task 13
+const port = 3000;
+
+const dotenv = require("dotenv");
+const res = require("express/lib/response");
+
+dotenv.config();
+
 const pg = require("pg");
 
+
+// const client = new pg.Client("postgres://obieda:0000@localhost:5432/movie");
+
 // const client = new pg.Client(process.env.DATABASE_URL);
+
 
 const client = new pg.Client({
     connectionString: process.env.DATABASE_URL,
@@ -22,10 +33,12 @@ app.use(exprees.json());
 //task13
 
 
+
 const dotenv = require("dotenv");
 const res = require("express/lib/response");
 
 dotenv.config();
+
 
 const APIKEY = process.env.APIKEY;
 const port = process.env.PORT;
