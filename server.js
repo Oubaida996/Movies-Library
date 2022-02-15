@@ -5,6 +5,7 @@
 const exprees = require("express");
 const axios = require("axios");
 const jsonData = require("./movie_data/data.json");
+
 const app = exprees();
 //task 13
 const port = 3000;
@@ -16,7 +17,11 @@ dotenv.config();
 
 const pg = require("pg");
 
+
 // const client = new pg.Client("postgres://obieda:0000@localhost:5432/movie");
+
+// const client = new pg.Client(process.env.DATABASE_URL);
+
 
 const client = new pg.Client({
     connectionString: process.env.DATABASE_URL,
@@ -28,7 +33,18 @@ app.use(exprees.json());
 //task13
 
 
+
+const dotenv = require("dotenv");
+const res = require("express/lib/response");
+
+dotenv.config();
+
+
 const APIKEY = process.env.APIKEY;
+const port = process.env.PORT;
+
+
+const port = process.env.PORT;
 
 //======End declear Variable
 
@@ -88,8 +104,14 @@ app.get("/search", (req, res) => {
             `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${serachQuery}&page=${pageQuery}`
         )
         .then((value) => {
+
+            res.status(200).json(value.data);
+            console.log(value);
+
+
             // console.log(value.data);
             res.status(200).json(value.data);
+
         });
 });
 
@@ -242,7 +264,8 @@ app.get("/", (req, res) => {
         jsonData.overview
     );
     movies.push(newMovie);
-    res.status(200).json(movies);
+    res.status(200).send("movies");
+    // res.status(200).json(movies);
     //  res.send(movies);
 });
 
