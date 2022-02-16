@@ -8,17 +8,17 @@ const jsonData = require("./movie_data/data.json");
 
 const app = exprees();
 //task 13
-const port = 3000;
+
 
 const dotenv = require("dotenv");
-const res = require("express/lib/response");
+
 
 dotenv.config();
-
+const PORT = process.env.PORT;
 const pg = require("pg");
 
 
-// const client = new pg.Client("postgres://obieda:0000@localhost:5432/movie");
+
 
 // const client = new pg.Client(process.env.DATABASE_URL);
 
@@ -34,17 +34,15 @@ app.use(exprees.json());
 
 
 
-const dotenv = require("dotenv");
-const res = require("express/lib/response");
 
-dotenv.config();
+
 
 
 const APIKEY = process.env.APIKEY;
-const port = process.env.PORT;
 
 
-const port = process.env.PORT;
+
+
 
 //======End declear Variable
 
@@ -299,49 +297,8 @@ function handleError404() {
 //===End Task 11
 
 client.connect().then((value) => {
-    app.listen(port, () => {
-        console.log(`server has started on port ${port}`);
+    app.listen(PORT, () => {
+        console.log(`server has started on port ${PORT}`);
     });
 });
 
-// {
-//     "movie_name": "Spider-Man: No Way Home",
-//     "poster_path":"/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-//     "overview":"Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
-// }
-
-// ======Start This is section for me
-
-// const exprees = require("express");
-
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
-
-// const app = exprees();
-// app.use(cors());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
-// let notes = [];
-
-// // app.get('/notes', (req, res) => {
-// //     res.send("سسسسسسس");
-// // });
-
-// app.post("/notes", (req, res) => {
-//     const body = req.body;
-//     // console.log(res.statusCode);
-//     res.statusCode === 200 ? console.log("Body :", body) : console.log("Body :", "false");
-
-//     notes.push(body.title);
-
-//     res.send(true);
-// });
-
-// const port = 3000;
-
-// app.listen(port, () => {
-//     console.log(`server has started on port ${port}`);
-// });
-
-// ======End This is section for me
